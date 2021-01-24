@@ -2,8 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import ugettext_lazy as _
+from django.db.models.signals import pre_save, post_save
+from django.dispatch import receiver
 
-
+from .utils import unique_verification_code_generator
 
 
 class CustomUserManager(BaseUserManager):
@@ -49,3 +51,30 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    telephone = models.CharField(max_length=13)
+
+
+@receiver(post_save, sender=CustomUser)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
+
+
+class CustomUserVerificationCode(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    code = models.PositiveIntegerField()
+    date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.user} - {self.code}'
+
+
+def pre_save_verification_code(instance, sender, *args, **kwargs):
+    instance.code = unique_verification_code_generator(instance)
+
+pre_save.connect(pre_save_verification_code, sender=CustomUserVerificationCode)
