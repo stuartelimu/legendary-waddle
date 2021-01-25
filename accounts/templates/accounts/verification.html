@@ -85,7 +85,23 @@
           aria-labelledby="my-dialog-title"
           aria-describedby="my-dialog-content">
 
-          <div class="mdc-chip" role="row">
+          {% if messages %}
+          <ul class="messages">
+              {% for message in messages %}
+              <div class="mdc-chip" role="row">
+                <div class="mdc-chip__ripple"></div>
+                <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">event</i>
+                <span role="gridcell">
+                  <span role="button" tabindex="0" class="mdc-chip__primary-action">
+                    <span class="mdc-chip__text">{{ message }}</span>
+                  </span>
+                </span>
+              </div>
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+          </ul>
+          {% endif %}
+          <!-- <div class="mdc-chip" role="row">
             <div class="mdc-chip__ripple"></div>
             <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">event</i>
             <span role="gridcell">
@@ -93,7 +109,7 @@
                 <span class="mdc-chip__text">Add to calendar</span>
               </span>
             </span>
-          </div>
+          </div> -->
 
           <div id="loader-wrapper">
             <div id="loader"></div>

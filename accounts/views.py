@@ -39,7 +39,7 @@ class SignUpView(CreateView):
             send_mail(
                 'verification code',
                 f'verification code {code}',
-                'admin@access.com',
+                'stuartelimu@gmail.com',
                 [self.email,],
                 fail_silently=False,
             )
