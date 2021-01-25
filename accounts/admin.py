@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from .models import CustomUser
+from .models import CustomUser, Profile
 
 
 class CustomUserAdmin(BaseUserAdmin):
@@ -25,4 +25,10 @@ class CustomUserAdmin(BaseUserAdmin):
     search_fields = ('email',)
     ordering = ('email',)
 
+
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'telephone')
+
+
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(Profile, ProfileAdmin)

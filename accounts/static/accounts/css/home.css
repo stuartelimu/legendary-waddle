@@ -1,0 +1,235 @@
+  #map {
+    height: 100%;
+  }
+
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+main .drawer-frame-root {
+  position: absolute;
+}
+
+main .mdc-top-app-bar {
+  background-color: transparent;
+  color: black;
+}
+
+  .search-card {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    top: 75px;
+    z-index: 1;
+  }
+
+  .search-card .mdc-card {
+    width: 450px;
+  }
+
+  .search-card .mdc-card label,
+  .req-card-mobile .mdc-card label {
+    margin: 0;
+  }
+
+  .req-card-mobile {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 20px;
+    z-index: 1;
+  }
+
+#request-helper-text {
+  text-align: right;
+  width: 100%;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+  .confirm-dialog ul li {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .req-preloader-container {
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .32);
+    opacity: 1;
+    display: none;
+    /* hidden by default */
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
+
+  #req-loader {
+    display: block;
+    position: relative;
+    /* left: 50%;
+    top: 50%; */
+    width: 100px;
+    height: 100px;
+    /* margin: -75px 0 0 -75px; */
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #3498db;
+    -webkit-animation: spin 2s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
+  }
+
+  #req-loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #e74c3c;
+    -webkit-animation: spin 3s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 3s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
+  }
+
+  #req-loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #f9c922;
+    -webkit-animation: spin 1.5s linear infinite;
+    /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 1.5s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Opera */
+  }
+
+  @-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(0deg);
+      /* IE 9 */
+      transform: rotate(0deg);
+      /* Firefox 16+, IE 10+, Opera */
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(360deg);
+      /* IE 9 */
+      transform: rotate(360deg);
+      /* Firefox 16+, IE 10+, Opera */
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(0deg);
+      /* IE 9 */
+      transform: rotate(0deg);
+      /* Firefox 16+, IE 10+, Opera */
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(360deg);
+      /* IE 9 */
+      transform: rotate(360deg);
+      /* Firefox 16+, IE 10+, Opera */
+    }
+  }
+
+  .confirm-dialog p {
+    display: flex;
+    align-items: center;
+  }
+
+  .mdc-form-field {
+    width: auto;
+  }
+
+  #ch-submit {
+    border: none;
+    background: transparent;
+  }
+
+  .reviews-list,
+  .mdc-list-divideer {
+    display: none;
+  }
+
+  #drawer-button {
+    display: block;
+  }
+
+  .my-mdc-list-item {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+    height: 48px;
+  }
+
+  .my-mdc-menu-header {
+    display: flex;
+    padding-left: 16px;
+    padding-right: 16px;
+    align-items: center;
+    text-align: justify;
+    justify-content: space-between;
+  }
+
+  .my-mdc-menu-header h6 {
+    display: flex;
+    align-items: center;
+  }
+
+  .my-mdc-menu-header h6 span {
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 40em) {
+    .search-card .mdc-card {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .mdc-dialog__surface {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #drawer-button {
+      display: none;
+    }
+  }
+
+  .view-link {
+    display: none;
+  }

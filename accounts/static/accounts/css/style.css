@@ -1,0 +1,313 @@
+/* global styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+
+:root {}
+
+body {
+  font-family: 'Roboto';
+  margin: 0;
+  padding-top: 0.1px;
+}
+
+article {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#chipset {
+  /* text-align: center; */
+  justify-content: center;
+}
+
+.mdc-form-field {
+  width: 100%;
+}
+
+label {
+  margin-bottom: 20px;
+}
+
+.fw {
+  width: 100%;
+}
+
+.mdc-button {
+  width: 100%;
+}
+
+
+.login-card {
+  width: 450px;
+  padding: 40px;
+}
+
+.btn-submit-lg {
+  margin: 20px 0;
+  height: 56px;
+}
+
+.line {
+  /* margin:0 0 1em; */
+  line-height: 2em;
+  padding: 0;
+  font-size: 1.5em;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.line:before,
+.line:after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  margin-left: -999em;
+  height: 2px;
+  width: 998em;
+  border-top: 1px solid grey;
+  /* background:rgba(0,0,0,0.2); */
+}
+
+.line:after {
+  left: auto;
+  width: 999em;
+  margin: 0 0 0 1em;
+}
+
+/* loader */
+#loader-wrapper {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#loader {
+  display: block;
+  position: relative;
+  /* left: 50%;
+  top: 50%; */
+  width: 100px;
+  height: 100px;
+  /* margin: -75px 0 0 -75px; */
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #3498db;
+  -webkit-animation: spin 2s linear infinite;
+  /* Chrome, Opera 15+, Safari 5+ */
+  animation: spin 2s linear infinite;
+  /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+#loader:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #e74c3c;
+  -webkit-animation: spin 3s linear infinite;
+  /* Chrome, Opera 15+, Safari 5+ */
+  animation: spin 3s linear infinite;
+  /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+#loader:after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #f9c922;
+  -webkit-animation: spin 1.5s linear infinite;
+  /* Chrome, Opera 15+, Safari 5+ */
+  animation: spin 1.5s linear infinite;
+  /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: rotate(0deg);
+    /* IE 9 */
+    transform: rotate(0deg);
+    /* Firefox 16+, IE 10+, Opera */
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: rotate(360deg);
+    /* IE 9 */
+    transform: rotate(360deg);
+    /* Firefox 16+, IE 10+, Opera */
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: rotate(0deg);
+    /* IE 9 */
+    transform: rotate(0deg);
+    /* Firefox 16+, IE 10+, Opera */
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: rotate(360deg);
+    /* IE 9 */
+    transform: rotate(360deg);
+    /* Firefox 16+, IE 10+, Opera */
+  }
+}
+
+.mdc-form-field>label {
+  margin-bottom: 0;
+}
+
+/* form */
+#checksField {
+  display: none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+#checksField p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+
+.correct {
+  color: green;
+}
+
+.correct:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+.wrong {
+  color: red;
+}
+
+.wrong:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+
+/* error tooltip */
+.tooltip {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: opacity, visibility;
+  /* max-width: 250px; */
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  color: #fff;
+  box-sizing: border-box;
+  display: inline-block;
+  position: absolute;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform: translate(15%, -50%);
+  transform: translate(132%, -50%);
+  top: 50%;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  visibility: visible;
+  margin: 0;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+  z-index: 100;
+}
+
+.tooltip:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  margin-top: -10px;
+  left: -10px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid rgba(0, 0, 0, 0.7);
+}
+
+.tooltip p {
+  padding: 5px 0 5px 35px;
+  font-size: 18px;
+}
+
+.validation-card {
+  position: absolute;
+  bottom: 225px;
+  width: 250px;
+  padding: 15px;
+  display: none;
+}
+
+.validation-card p {
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.validation-card .material-icons {
+  background-color: red;
+	border-radius: 50%;
+	font-size: unset;
+	padding: 2px;
+	color: #fff;
+	margin-right: 5px;
+}
+
+.validation-card.email {
+  bottom: 300px;
+}
+
+.hide {
+  display: none;
+  transition: ease-in-out 3s;
+}
+
+
+/* small screens */
+@media screen and (max-width: 40em) {  }

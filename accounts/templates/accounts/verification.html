@@ -1,19 +1,166 @@
 {% extends 'accounts/base.html' %}
 
-{% block content %}
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
 
-<p>Verification</p>
-<form action="." method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Verify">
-    <p><a href="{% url 'resend-code' %}">Get another code</a></p>
-</form>
+{% load static %}
+
+{% block content %}
+
+
+  <style>
+
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+      height: 100%;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .demo-width-class {
+      width: 100px;
+      margin-right: 20px;
+    }
+
+    .fw-width {
+      width: 100%;
+
+    }
+
+    .signup-card {
+      width: 450px;
+      padding-top: 40px;
+    }
+
+    .signup-card-header {
+      margin: 20px 0;
+      text-align: center;
+
+    }
+
+    .signup-card-header h3 {
+      font-weight: bold;
+    }
+
+    .btn-submit-lg {
+      margin: 20px 0;
+      height: 56px;
+    }
+
+    .terms-and-cond {
+      margin-top: 15px;
+    }
+
+    @media all and (max-width: 450px) { 
+      .signup-card {
+        width: 80%;
+        margin: 0 auto;
+        padding: 15px;
+      }
+    }
+
+
+
+  </style>
+
+
+  <div id="map"></div>
+
+  <article>
+
+    <!-- sign up -->
+    
+
+    <div class="mdc-dialog mdc-dialog--open signup-card" style="left: unset;">
+      <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface signup-card"
+          style=" width: 450px;"
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby="my-dialog-title"
+          aria-describedby="my-dialog-content">
+
+          <div class="mdc-chip" role="row">
+            <div class="mdc-chip__ripple"></div>
+            <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">event</i>
+            <span role="gridcell">
+              <span role="button" tabindex="0" class="mdc-chip__primary-action">
+                <span class="mdc-chip__text">Add to calendar</span>
+              </span>
+            </span>
+          </div>
+
+          <div id="loader-wrapper">
+            <div id="loader"></div>
+          </div>
+          <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
+          <div class="mdc-dialog__title" id="my-dialog-title">
+            <p class="small">We have sent a verification code to {{ request.session.email }}</p>
+            <!-- <a href="">use email instead?</a> -->
+          </div>
+
+          <div class="mdc-dialog__content" id="my-dialog-content">
+            <form action="." method="POST" class="signup-form">
+              {% csrf_token %}
+              <label class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-leading-icon">
+                <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">security</span>
+                <input type="text" class="mdc-text-field__input" name="code" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" aria-labelledby="code" maxlength="6" required>
+                <span class="mdc-notched-outline">
+                  <span class="mdc-notched-outline__leading"></span>
+                  <span class="mdc-notched-outline__notch">
+                    <span class="mdc-floating-label" id="security-code">Verification Code</span>
+                  </span>
+                  <span class="mdc-notched-outline__trailing"></span>
+                </span>
+              </label>
+              <p><a href="{% url 'resend-code' %}">Resend Code</a></p>
+      
+              <button class="mdc-button mdc-button--raised btn-submit-lg" type="submit">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">Verify</span>
+              </button>
+      
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-dialog__scrim"></div>
+    </div>
+
+  </article>
+
+  <script src="{% static 'accounts/js/signup.js' %}"></script>
+  <script src="{% static 'accounts/js/script.js' %}"></script>
+
+
+
+  <script>
+
+    const PHONE = sessionStorage.getItem('phone');
+    const EMAIL = sessionStorage.getItem('email');
+
+    document.querySelector('.phone').textContent = PHONE;
+
+    let map;
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+      });
+    }
+
+    const dialog = new mdc.dialog.MDCDialog(document.querySelector('.mdc-dialog'));
+
+    const chipSetEl = document.querySelector('.mdc-chip-set');
+    const chipSet = new mdc.chips.MDCChipSet(chipSetEl);
+
+  </script>
+
+
 {% endblock content %}

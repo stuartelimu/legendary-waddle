@@ -1,11 +1,368 @@
 {% extends 'accounts/base.html' %}
 
+{% load static %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'accounts/css/intlTelInput.css' %}">
+
+{% endblock stylesheet %}
+
 {% block content %}
 
-<form action="." method="post">
-    {% csrf_token %}   
-    {{ form.as_p }}
-    <input type="submit" value="Sign Up">
-</form>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTA6pssoGd_BaNHu0fp7jAZ9N1xcfgCk8&callback=initMap&libraries=&v=weekly"
+    defer
+  ></script>
+
+
+  <style>
+
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+      height: 100%;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+    /* html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    } */
+
+
+    .demo-width-class {
+      width: 100px;
+      margin-right: 20px;
+    }
+
+    .fw-width {
+      width: 100%;
+
+    }
+
+    .signup-card {
+      /* width: 450px; */
+      padding-top: 40px;
+    }
+
+    .signup-card-header {
+      margin: 20px 0;
+      text-align: center;
+
+    }
+
+    .signup-card-header h3 {
+      font-weight: bold;
+    }
+
+    .btn-submit-lg {
+      margin: 20px 0;
+      height: 56px;
+    }
+
+    .terms-and-cond {
+      margin-top: 15px;
+    }
+
+    @media all and (max-width: 450px) { 
+      .signup-card {
+        /* width: 80%; */
+        margin: 0 auto;
+        padding: 15px;
+      }
+    }
+
+    .iti__flag {background-image: url("{% static 'accounts/img/flags.png' %}");}
+
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .iti__flag {background-image: url("{% static 'accounts/img/flags@2x.png' %}");}
+    }
+
+    .iti__flag {
+      height: 15px;
+      box-shadow: 0px 0px 1px 0px #888;
+      background-image: url("{% static 'accounts/img/flags.png' %}");
+      background-repeat: no-repeat;
+      background-color: #DBDBDB;
+      background-position: 20px 0; }
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .iti__flag {
+          background-image: url("{% static 'accounts/img/flags@2x.png' %}"); } }
+
+    .iti__flag.iti__np {
+      background-color: transparent; }
+
+    .iti {
+      width: 100%;
+      margin-bottom: 5px;
+
+    }
+
+
+    #phone {
+      width: 100%;
+      height: 56px;
+    }
+
+    
+
+
+  </style>
+
+
+  <div id="map"></div>
+
+  <div>
+
+
+
+    <!-- sign up -->
+    
+
+    <div class="mdc-dialog mdc-dialog--open signup-card">
+      <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface signup-card"
+          style=" width: 450px;"
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby="my-dialog-title"
+          aria-describedby="my-dialog-content">
+          <!-- <div id="loader-wrapper">
+            <div id="loader"></div>
+          </div> -->
+          <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
+          <h2 class="mdc-dialog__title" id="my-dialog-title"><!--
+         -->Get Started<!--
+       --></h2>
+          <div class="mdc-dialog__content" id="my-dialog-content">
+            <form method="POST" action="." class="signup-form">
+              {% csrf_token %}
+              <!-- {{ form.as_p }} -->
+              <label style="margin-top: 5px;" class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-leading-icon">
+                <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">account_circle</span>
+                <input type="text" class="mdc-text-field__input" name="first_name" id="id_first_name" aria-labelledby="fname" required>
+                <span class="mdc-notched-outline">
+                  <span class="mdc-notched-outline__leading"></span>
+                  <span class="mdc-notched-outline__notch">
+                    <span class="mdc-floating-label" id="fname">First Name</span>
+                  </span>
+                  <span class="mdc-notched-outline__trailing"></span>
+                </span>
+              </label>
+
+              
+              <!-- hidden input for password -->
+              
+              <input type="hidden" name="Password" id="">
+
+              <!-- hidden input for code -->
+              <input type="hidden" name="Phone_AreaCode" id="">
+
+              <input type="hidden" name="Google_UID" >
+
+
+              <label style="margin-top: 5px;" class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-leading-icon">
+                <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">account_circle</span>
+                <input type="text" class="mdc-text-field__input" name="last_name" id="id_last_name" aria-labelledby="lname" required>
+                <span class="mdc-notched-outline">
+                  <span class="mdc-notched-outline__leading"></span>
+                  <span class="mdc-notched-outline__notch">
+                    <span class="mdc-floating-label" id="lname">Last Name</span>
+                  </span>
+                  <span class="mdc-notched-outline__trailing"></span>
+                </span>
+              </label>
+
+              <!-- <div class="mdc-text-field-helper-line">
+                <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg" aria-hidden="true">helper text</div>
+
+              </div> -->
+      
+              <div class="mdc-card validation-card email" style="display: none;">
+                <h4>Email must be in the format:</h4>
+                <p id="em"> <span class="material-icons">close</span> email@example.com</p>
+              
+              </div>
+              
+              <label class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-leading-icon">
+                <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">email</span>
+                <input type="email" class="mdc-text-field__input" name="email" id="id_email" maxlength="254" aria-labelledby="email-id" required>
+                <span class="mdc-notched-outline">
+                  <span class="mdc-notched-outline__leading"></span>
+                  <span class="mdc-notched-outline__notch">
+                    <span class="mdc-floating-label" id="email-id">Email</span>
+                  </span>
+                  <span class="mdc-notched-outline__trailing"></span>
+                </span>
+              </label>
+
+              <input type="tel" class="" name="telephone"
+                onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+                id="phone">
+                <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" aria-hidden="true"></div>
+      
+                <div class="mdc-card validation-card pwd" style="display: none;">
+                  <h4>Password must contain:</h4>
+                  <p id="letter"> <span class="material-icons">close</span> <b>A lowercase </b> letter</p>
+                  <p id="capital"> <span class="material-icons">close</span> <span><b>A capital(uppercase) </b> letter</span> </p>
+                  <p id="number"> <span class="material-icons">close</span> <b>A number</b></p>
+                  <p id="len"> <span class="material-icons">close</span> <b>At least 8 characters</b></p>
+                </div>
+
+                <label
+                class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-leading-icon mdc-text-field--with-trailing-icon">
+                <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">lock</span>
+                <input class="mdc-text-field__input" type="password" name="password1" autocomplete="new-password" aria-labelledby="id_password1" id="id_password1" minlength="8"
+                  required>
+
+                  <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0"
+                  role="button">visibility</i>
+            
+                <span class="mdc-notched-outline">
+                  <span class="mdc-notched-outline__leading"></span>
+                  <span class="mdc-notched-outline__notch">
+                    <span class="mdc-floating-label" id="pwd">Password</span>
+                  </span>
+                  <span class="mdc-notched-outline__trailing"></span>
+                </span>
+            
+              </label>
+
+              <label
+                class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-leading-icon mdc-text-field--with-trailing-icon">
+                <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">lock</span>
+                <input class="mdc-text-field__input" type="password" name="password2" aria-labelledby="id_password2" id="id_password2" 
+                  aria-controls="confirm-password-helper-text" minlength="8" aria-describedby="confirm-password-helper-text" autocomplete="new-password"
+                  required>
+
+                  <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0"
+                  role="button" id="toggle-confirm-password" >visibility</i>
+            
+                <span class="mdc-notched-outline">
+                  <span class="mdc-notched-outline__leading"></span>
+                  <span class="mdc-notched-outline__notch">
+                    <span class="mdc-floating-label" id="pwd">Confirm Password</span>
+                  </span>
+                  <span class="mdc-notched-outline__trailing"></span>
+                </span>
+            
+              </label>
+
+              <div class="mdc-text-field-helper-line">
+                <div id="confirm-password-helper-text" class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg" aria-hidden="true">
+                  
+                </div>
+              </div>
+
+              <div class="mdc-form-field terms-and-cond">
+                <div class="mdc-checkbox">
+                  <input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-tc" required />
+                  <div class="mdc-checkbox__background">
+                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                      <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                    </svg>
+                    <div class="mdc-checkbox__mixedmark"></div>
+                  </div>
+                  <div class="mdc-checkbox__ripple"></div>
+                </div>
+                <label for="checkbox-1">I accept the Terms & Conditions</label>
+              </div>
+      
+      
+              <button class="mdc-button mdc-button--raised btn-submit-lg" type="submit" id="btn-register">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">Get Started</span>
+              </button>
+      
+            </form>
+          </div>
+          
+        </div>
+      </div>
+      <div class="mdc-dialog__scrim"></div>
+    </div>
+
+  </div>
+
+  <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+  
+  <script src="{% static 'accounts/js/intlTelInput.js' %}"></script>
+
+
+  <script>
+
+    let COUNTRYCODE;
+
+
+    let map;
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+      });
+    }
+
+    const dialog = new mdc.dialog.MDCDialog(document.querySelector('.mdc-dialog'));
+
+
+    const helperText = new mdc.textField.MDCTextFieldHelperText(document.querySelector('.mdc-text-field-helper-text'));
+    // const helperText = new mdc.textField.MDCTextFieldHelperText(document.querySelector('.mdc-text-field-helper-text'));
+
+    var input = document.querySelector("#phone");
+    var iti = window.intlTelInput(input, {
+      // any initialisation options go here
+      utilsScript: "../../static/accounts/js/utils.js?1585994360633"
+    });
+
+    const errorMsg = document.querySelector('.mdc-text-field-helper-text');
+    // here, the index maps to the error code returned from getValidationError - see readme
+    const errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+    const reset = function() {
+      input.setCustomValidity("");
+      errorMsg.innerHTML = "";
+      // errorMsg.classList.add("hide");
+      // validMsg.classList.add("hide");
+    };
+
+    input.addEventListener('blur', () => {
+      console.log(input.value)
+      console.log(iti.getSelectedCountryData().dialCode)
+      // document.querySelector('input[name=telephone]').value = iti.getSelectedCountryData().dialCode;
+
+      reset();
+      if (input.value.trim()) {
+        if (iti.isValidNumber()) {
+          errorMsg.innerHTML = "";
+          // document.querySelector('input[name=telephone]').value = iti.getSelectedCountryData().get;
+        } else {
+          var errorCode = iti.getValidationError();
+          errorMsg.innerHTML = errorMap[errorCode];
+          input.setCustomValidity(errorMap[errorCode]);
+          // errorMsg.classList.remove("hide");
+        }
+      }
+
+    });
+
+    input.addEventListener("countrychange", function() {
+      // do something with iti.getSelectedCountryData()
+    });
+
+    // on keyup / change flag: reset
+    input.addEventListener('change', reset);
+    input.addEventListener('keyup', reset);
+
+
+    
+
+
+
+
+  </script>
+  <script src="{% static 'accounts/js/script.js' %}"></script>
 {% endblock content %}

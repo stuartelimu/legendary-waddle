@@ -1,1 +1,1109 @@
-Home
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Omni Global{% endblock title %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{% static 'accounts/css/home.css' %}">
+
+    
+    
+
+
+</head>
+<body class="mdc-typography">
+
+  <main>
+    <div class="drawer-frame-root">
+      <aside class="mdc-drawer mdc-drawer--modal">
+      <div class="mdc-drawer__header">
+        <h3 class="mdc-drawer__title">Mail</h3>
+        <h6 class="mdc-drawer__subtitle">{{ request.user.email }}</h6>
+      </div>
+      <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+          <a class="mdc-list-item mdc-list-item--activated" href="#" tabindex="0" aria-selected="true">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
+            Inbox
+          </a>
+          <a class="mdc-list-item" href="#" tabindex="-1">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i>
+            Star
+          </a>
+          <a class="mdc-list-item" href="#" tabindex="-1">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
+            Sent Mail
+          </a>
+          <a class="mdc-list-item" href="#" tabindex="-1">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>
+            Drafts
+          </a>
+          <hr class="mdc-list-divider">
+          <h6 class="mdc-list-group__subheader">Labels</h6>
+          <a class="mdc-list-item" href="#" tabindex="-1">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i>
+            Family
+          </a>
+          <a class="mdc-list-item" href="#" tabindex="-1">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i>
+            Friends
+          </a>
+          <a class="mdc-list-item" href="#" tabindex="-1">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i>
+            Work
+          </a>
+          <hr class="mdc-list-divider">
+          <a class="mdc-list-item" href="#" tabindex="-1">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">settings</i>
+            Settings
+          </a>
+          <a class="mdc-list-item" href="#" tabindex="-1">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">
+              announcement
+            </i>
+            Help &amp; feedback
+          </a>
+        </nav>
+      </div>
+    </aside>
+    <div class="mdc-drawer-scrim"></div>
+    <div class="drawer-frame-app-content">
+      <header class="mdc-top-app-bar drawer-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+          <!-- <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.7142857142857142; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+              menu
+            </button>
+            <span class="mdc-top-app-bar__title">Modal Drawer</span>
+          </section> -->
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <button id="drawer-button" class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.7142857142857142; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+              menu
+            </button>
+            <span class="mdc-top-app-bar__title">Omni Global</span> 
+          </section>
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+            <div class="mdc-switch">
+              <div class="mdc-switch__track"></div>
+              <div class="mdc-switch__thumb-underlay">
+                <div class="mdc-switch__thumb"></div>
+                <input type="checkbox" id="basic-switch" class="mdc-switch__native-control" role="switch" aria-checked="false">
+              </div>
+            </div>
+            <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Bookmark this page">notifications</button>
+            <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded mdc-menu-surface--anchor"  id="menu-open">
+              
+              <img src="{% if request.user.avator %}{{ request.user.avator }}{% else %}{% static 'accounts/img/avatar.png' %}{% endif %}" id="avator" class="mdc-icon-button__icon"/>
+
+              <div class="mdc-menu mdc-menu-surface">
+                <h2 class="mdc-typography mdc-typography--subtitle2" style="text-align: justify; margin-top: 20px; padding-left: 16px;">Account Details</h2>
+                <div class="my-mdc-menu-header">
+                  <div>
+                    
+                    <h2 class="mdc-typography mdc-typography--subtitle2">{{ request.user.first_name }} {{ request.user.last_name }}</h2>
+
+                    <!-- <h6 id="mdc-dialog-with-list-label" class="mdc-dialog__title">Abhishek Verma</h6> -->
+                    <h6 class="mdc-typography">4.86 <span class="material-icons">star</span></h6>
+                  </div>
+                  <div>
+                    <span class="fa-stack">
+                      <span class="fa fa-circle-o fa-stack-2x"></span>
+                      <strong class="mdc-typography fa-stack-1x">2</strong>
+                    </span>
+                    <!-- <button class="mdc-button mdc-button--raised">  <span class="mdc-button__ripple"></span> upgrade</button> -->
+                  </div>
+                </div>
+                
+                
+                <!-- <img src="img/avator.jpg" id="avator-lg" alt="Abhishek Verma" style="width: 60px; height: 60px; border-radius: 50%;"> -->
+                <ul class="mdc-list profile-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
+    
+                  <li class="mdc-list-item" role="menuitem" tabindex="0">
+                    <!-- <span class="mdc-list-item__ripple"></span> -->
+                    <span class="mdc-list-item__graphic material-icons">home</span>
+                    <span class="mdc-list-item__text">Joined {{ request.user.date_joined|date }}</span>
+                    <!-- <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span> -->
+                  </li>
+                  <li class="my-mdc-list-item" role="menuitem" tabindex="1">
+                    <!-- <span class="mdc-list-item__ripple"></span> -->
+                    <span class="mdc-list-item__graphic material-icons">call</span>
+                    <span class="mdc-list-item__text telephone">{{ request.user.profile.telephone }}</span>
+                    <span class="mdc-list-item__meta material-icons edit-phone" aria-hidden="true">edit</span>
+
+    
+                  </li>
+                  <li class="my-mdc-list-item" role="menuitem" tabindex="2">
+                    <!-- <span class="mdc-list-item__ripple"></span> -->
+                    <span class="mdc-list-item__graphic material-icons">email</span>
+                    <span id="email-alias" class="mdc-list-item__text email">{{ request.user.email }}</span>
+                    <span class="mdc-list-item__meta material-icons edit-email" aria-hidden="true">edit</span>
+
+                  </li>
+                  <li class="mdc-list-item" role="menuitem" tabindex="3">
+                    <!-- <span class="mdc-list-item__ripple"></span> -->
+                    <span class="mdc-list-item__graphic material-icons">credit_card</span>
+                    <span class="mdc-list-item__text card">****-****-****-7632</span>
+                    <span class="mdc-list-item__meta material-icons edit-card" aria-hidden="true">edit</span>
+
+                  </li>
+    
+    
+                  <li class="mdc-list-divider" role="separator"></li>
+    
+                  <li class="mdc-list-item" role="menuitem">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__graphic material-icons">chat</span>
+                    <span class="mdc-list-item__text">Your Responses</span>
+                  </li>
+                  <li class="mdc-list-item" role="menuitem">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__graphic material-icons">chat</span>
+                    <span class="mdc-list-item__text">Your Queries</span>
+                  </li>
+    
+                  <li class="mdc-list-divider" role="separator"></li>
+    
+                  <li class="mdc-list-item" role="menuitem">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__graphic material-icons">help</span>
+                    <span class="mdc-list-item__text">Help</span>
+                  </li>
+                  <li class="my-mdc-list-item" id="settings-open" role="menuitem">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__graphic material-icons">settings</span>
+                    <span class="mdc-list-item__text">Settings</span>
+                  </li>
+                  <li class="my-mdc-list-item" role="menuitem">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__graphic material-icons">login</span>
+                    <span class="mdc-list-item__text">
+                      <a href="{% url 'logout' %}">
+                        Logout
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+                <div>
+                  
+                </div>
+              </div>
+            </button>
+          </section>
+        </div>
+      </header>
+      <div class="drawer-main-content">
+        <div class="mdc-top-app-bar--fixed-adjust"></div>
+
+        
+        
+    </div>
+    </div>
+    </div>
+  </main>
+
+
+  <!-- <header class=" mdc-top-app-bar">
+    <div class="mdc-top-app-bar__row">
+      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+        <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon--unbounded">menu</button><span class="mdc-top-app-bar__title">San Francisco, CA</span> </section>
+      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+        <div class="mdc-chip mdc-ripple-upgraded" role="row" id="mdc-chip-18" style="--mdc-ripple-fg-size:87px; --mdc-ripple-fg-scale:1.8303195007965203; --mdc-ripple-fg-translate-start:20.5px, -27.29998779296875px; --mdc-ripple-fg-translate-end:29.383331298828125px, -27.5px; background-color: transparent; color: inherit;">
+          <i class="material-icons mdc-chip__icon mdc-chip__icon--leading mdc-chip__icon--leading" style="color: inherit;">public</i><span role="button"
+            tabindex="0" class="mdc-chip__text">EN</span></div>
+ 
+        <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Download">file_download</button>
+        <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Bookmark this page">bookmark</button>
+        <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded mdc-menu-surface--anchor"  id="menu-open">
+          <img src="img/avator.jpg" class="mdc-icon-button__icon"/>
+          <div class="mdc-menu mdc-menu-surface">
+            <h6 id="mdc-dialog-with-list-label" class="mdc-dialog__title">Abhishek Verma</h6>
+            <img src="img/avator.jpg" alt="Abhishek Verma" style="width: 60px; height: 60px; border-radius: 50%;">
+            <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
+
+              <li class="mdc-list-item" role="menuitem">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="material-icons">home</span>
+                <span class="mdc-list-item__text">Joined Jan-2020</span>
+              </li>
+              <li class="mdc-list-item" role="menuitem">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="material-icons">call</span>
+                <span class="mdc-list-item__text">+1 6505806783</span>
+
+              </li>
+              <li class="mdc-list-item" role="menuitem">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="material-icons">email</span>
+                <span class="mdc-list-item__text">av@gmail.com</span>
+              </li>
+              <li class="mdc-list-item" role="menuitem">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="material-icons">credit_card</span>
+                <span class="mdc-list-item__text">****-****-****-7632</span>
+              </li>
+
+
+              <li class="mdc-list-divider" role="separator"></li>
+
+              <li class="mdc-list-item" role="menuitem">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="material-icons">chat</span>
+                <span class="mdc-list-item__text">Your Responses</span>
+              </li>
+              <li class="mdc-list-item" role="menuitem">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="material-icons">chat</span>
+                <span class="mdc-list-item__text">Your Queries</span>
+              </li>
+
+              <li class="mdc-list-divider" role="separator"></li>
+
+              <li class="mdc-list-item" role="menuitem">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="material-icons">help</span>
+                <span class="mdc-list-item__text">Help</span>
+              </li>
+              <li class="mdc-list-item" role="menuitem">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="material-icons">settings</span>
+                <span class="mdc-list-item__text">Settings</span>
+              </li>
+            </ul>
+          </div>
+        </button>
+      </section>
+    </div>
+  </header> -->
+
+    <!-- <section class="search-card">
+      <div class="mdc-card">
+        <form action="">
+          <label class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+            <span class="mdc-notched-outline">
+              <span class="mdc-notched-outline__leading"></span>
+              <span class="mdc-notched-outline__notch">
+                <span class="mdc-floating-label" id="my-label-id">Enter a location</span>
+              </span>
+              <span class="mdc-notched-outline__trailing"></span>
+            </span>
+            <input class="mdc-text-field__input" id="pac-input" type="text" aria-labelledby="my-label-id">
+            <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">search</i>
+          </label>
+        </form>
+      </div>
+    </section>
+
+    <div id="map"></div> -->
+
+    <section class="search-card">
+      <div class="mdc-card">
+        <form action="">
+          <label class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+            <span class="mdc-notched-outline">
+              <span class="mdc-notched-outline__leading"></span>
+              <span class="mdc-notched-outline__notch">
+                <span class="mdc-floating-label" id="my-label-id">Enter a location</span>
+              </span>
+              <span class="mdc-notched-outline__trailing"></span>
+            </span>
+            <input class="mdc-text-field__input" id="pac-input" type="text" aria-labelledby="my-label-id">
+            <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">search</i>
+          </label>
+        </form>
+      </div>
+    </section>
+
+    <div id="map"></div>
+    <section class="confirm-dialog">
+      <div class="mdc-dialog">
+        <div class="mdc-dialog__container">
+          <div class="mdc-dialog__surface"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="my-dialog-title"
+            aria-describedby="req-confirm-dialog">
+            <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
+            <h2 class="mdc-dialog__title" id="my-dialog-title"><!--
+           -->Confirm Your Request<!--
+         --></h2>
+            <div class="mdc-dialog__content" id="req-confirm-dialog">
+              <p><span class="material-icons" style="margin-right: 5px;">location_on</span> <span class="qn-location"></span> </p>
+              <p><span class="material-icons" style="margin-right: 5px;">
+                question_answer
+                </span> <span class="qn-text"></span></p>
+              <ul class="mdc-list mdc-list--avatar-list">
+                <li class="mdc-list-item" tabindex="0">
+
+
+                  <div class="mdc-form-field mdc-list-item__graphic">
+                    <div class="mdc-checkbox">
+                      <input type="checkbox"
+                             class="mdc-checkbox__native-control"
+                             id="text-ans"
+                             value="1"
+                             name="req-cost"
+                             checked
+                             onclick="return false;"
+                             />
+                      <div class="mdc-checkbox__background">
+                        <svg class="mdc-checkbox__checkmark"
+                             viewBox="0 0 24 24">
+                          <path class="mdc-checkbox__checkmark-path"
+                                fill="none"
+                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                        </svg>
+                        <div class="mdc-checkbox__mixedmark"></div>
+                      </div>
+                      <div class="mdc-checkbox__ripple"></div>
+                    </div>
+                  </div>
+                  <!-- <span title="Free Web tutorials" id="me" class="material-icons">info</span> -->
+                  
+
+
+                  <span class="mdc-list-item__text">
+                    <span class="mdc-list-item__primary-text">Text Only</span>
+                    <span class="mdc-list-item__secondary-text">Get only text answers.</span>
+                  </span>
+
+                  <!-- <span class="mdc-list-item__meta" aria-hidden="true">info</span> -->
+                  <div class="mdc-form-field mdc-list-item__meta">
+                    +1
+                  </div>
+                  
+                </li>
+                <li class="mdc-list-item" tabindex="1">
+                  <div class="mdc-form-field mdc-list-item__graphic">
+                    <div class="mdc-checkbox">
+                      <input type="checkbox"
+                             class="mdc-checkbox__native-control"
+                             id="photo-ans"
+                             name="req-cost"
+                             value="2"/>
+                      <div class="mdc-checkbox__background">
+                        <svg class="mdc-checkbox__checkmark"
+                             viewBox="0 0 24 24">
+                          <path class="mdc-checkbox__checkmark-path"
+                                fill="none"
+                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                        </svg>
+                        <div class="mdc-checkbox__mixedmark"></div>
+                      </div>
+                      <div class="mdc-checkbox__ripple"></div>
+                    </div>
+                  </div>
+                  <span class="mdc-list-item__text">
+                    <span class="mdc-list-item__primary-text">With Picture</span>
+                    <span class="mdc-list-item__secondary-text">Get text answers with pics.</span>
+                  </span>
+                  <div class="mdc-form-field mdc-list-item__meta">
+                    +2
+                  </div>
+                </li>
+                <li class="mdc-list-item" tabindex="2">
+                  <div class="mdc-form-field mdc-list-item__graphic">
+                    <div class="mdc-checkbox">
+                      <input type="checkbox"
+                             class="mdc-checkbox__native-control"
+                             id="video-ans"
+                             name="req-cost"
+                             value="3"/>
+                      <div class="mdc-checkbox__background">
+                        <svg class="mdc-checkbox__checkmark"
+                             viewBox="0 0 24 24">
+                          <path class="mdc-checkbox__checkmark-path"
+                                fill="none"
+                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                        </svg>
+                        <div class="mdc-checkbox__mixedmark"></div>
+                      </div>
+                      <div class="mdc-checkbox__ripple"></div>
+                    </div>
+                  </div>
+                  <span class="mdc-list-item__text">
+                    <span class="mdc-list-item__primary-text">With Video</span>
+                    <span class="mdc-list-item__secondary-text">Get answers with text, pics and videos.</span>
+                  </span>
+                  
+                  <div class="mdc-form-field mdc-list-item__meta">
+                    <span>+3</span>
+                  </div>
+                </li>
+              </ul>
+              <p>Total: $<span class="tt"></span></p>
+            </div>
+            
+            <div class="mdc-dialog__actions">
+              <button type="button" class="mdc-button mdc-dialog__button" id="req-cancel" data-mdc-dialog-action="close">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">Cancel</span>
+              </button>
+              <button type="button" class="mdc-button mdc-dialog__button" id="req-submit" data-mdc-dialog-action="accept">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">OK</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+      </div>
+    </section>
+
+    
+
+    <section class="req-card-mobile">
+      <div class="mdc-card">
+        <div>
+          
+        </div>
+          <label class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+            <span class="mdc-notched-outline">
+              <span class="mdc-notched-outline__leading"></span>
+              <span class="mdc-notched-outline__notch">
+                <span class="mdc-floating-label" id="my-label-id">Ask Something</span>
+              </span>
+              <span class="mdc-notched-outline__trailing"></span>
+            </span>
+            <input class="mdc-text-field__input" id="qn-input" 
+              type="text" 
+              maxlength="200"
+              aria-labelledby="my-label-id"
+              aria-controls="request-helper-text">
+            <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button" id="qn-submit">send</i>
+          </label>
+          <div class="mdc-text-field-helper-line">
+            <div id="request-helper-text" class="mdc-text-field-helper-text--persistent mdc-text-field-helper-text" aria-hidden="true">
+              <span>0</span>/<span>200</span>
+            </div>
+          </div>
+      </div>
+    </section>
+
+    <section class="req-preloader-container">
+      <div id="req-preloader">
+        <div id="req-loader"></div>
+      </div>
+    </section>
+
+    <section class="chat-window">
+      <!-- full screen modal for mobile -->
+      <div>
+        <div id="mdc-dialog-with-list" class="mdc-dialog mdc-dialog--close mdc-dialog--scrollable" role="alertdialog"
+          aria-modal="true" aria-labelledby="mdc-dialog-with-list-label" aria-describedby="mdc-dialog-with-list-description">
+          <div class="mdc-dialog__scrim"></div>
+          <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface">
+              <h2 id="mdc-dialog-with-list-label" class="mdc-dialog__title">Chat with your Matchee</h2>
+              <section id="mdc-dialog-with-list-description" class="mdc-dialog__content">
+                <ul class="mdc-list chat-list mdc-list--two-line mdc-list--avatar-list">
+
+                  
+
+                  <li class="reviews-list">
+                    <button id="add-to-favorites"
+                      class="mdc-icon-button"
+                      aria-label="Add to favorites"
+                      aria-pressed="false">
+                      <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">star</i>
+                      <i class="material-icons mdc-icon-button__icon">star_border</i>
+                    </button>
+                    <button id="add-to-favorites"
+                      class="mdc-icon-button"
+                      aria-label="Add to favorites"
+                      aria-pressed="false">
+                      <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">star</i>
+                      <i class="material-icons mdc-icon-button__icon">star_border</i>
+                    </button>
+                    <button id="add-to-favorites"
+                      class="mdc-icon-button"
+                      aria-label="Add to favorites"
+                      aria-pressed="false">
+                      <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">star</i>
+                      <i class="material-icons mdc-icon-button__icon">star_border</i>
+                    </button>
+                    <button id="add-to-favorites"
+                      class="mdc-icon-button"
+                      aria-label="Add to favorites"
+                      aria-pressed="false">
+                      <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">star</i>
+                      <i class="material-icons mdc-icon-button__icon">star_border</i>
+                    </button>
+                    <button id="add-to-favorites"
+                      class="mdc-icon-button"
+                      aria-label="Add to favorites"
+                      aria-pressed="false">
+                      <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">star</i>
+                      <i class="material-icons mdc-icon-button__icon">star_border</i>
+                    </button>
+                    
+                  </li>
+
+                  <li class="mdc-list-divider" role="separator"></li>
+                  <!-- <li class="mdc-list-item mdc-ripple-upgraded" tabindex="0" id="d215239f-afae-4724-8f11-218b1a074939"
+                    style="--mdc-ripple-fg-size:360px; --mdc-ripple-fg-scale:1.7064015527130008; --mdc-ripple-fg-translate-start:64px, -144.8000030517578px; --mdc-ripple-fg-translate-end:120px, -144px;">
+                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">folder</span><span
+                      class="mdc-list-item__text"><span class="mdc-list-item__primary-text">Dog Photos</span><span
+                        class="mdc-list-item__secondary-text">9 Jan 2018</span></span><span class="mdc-list-item__meta material-icons"
+                      aria-hidden="true">info</span></li>
+                  <li class="mdc-list-item mdc-ripple-upgraded" id="e800dd81-ae42-4426-a23d-58d433968306" tabindex="-1"
+                    style="--mdc-ripple-fg-size:360px; --mdc-ripple-fg-scale:1.7064015527130008; --mdc-ripple-fg-translate-start:-71px, -147.79998779296875px; --mdc-ripple-fg-translate-end:120px, -144px;">
+                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">folder</span><span
+                      class="mdc-list-item__text"><span class="mdc-list-item__primary-text">Cat Photos</span><span
+                        class="mdc-list-item__secondary-text">22 Dec 2017</span></span><span
+                      class="mdc-list-item__meta material-icons" aria-hidden="true">info</span></li>
+                  <li class="mdc-list-divider" role="separator"></li>
+                  <li class="mdc-list-item mdc-ripple-upgraded" id="370c3517-c7dc-4d29-ad94-a22f4af0bd31" tabindex="-1"
+                    style="--mdc-ripple-fg-size:360px; --mdc-ripple-fg-scale:1.7064015527130008; --mdc-ripple-fg-translate-start:-63px, -158.79998779296875px; --mdc-ripple-fg-translate-end:120px, -144px;">
+                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">folder</span><span
+                      class="mdc-list-item__text"><span class="mdc-list-item__primary-text">Potatoes</span><span
+                        class="mdc-list-item__secondary-text">30 Noc 2017</span></span><span
+                      class="mdc-list-item__meta material-icons" aria-hidden="true">info</span></li>
+                  <li class="mdc-list-item mdc-ripple-upgraded" id="286239d7-39f8-4b7d-84af-447077524e72" tabindex="-1"><span
+                      class="mdc-list-item__graphic material-icons" aria-hidden="true">folder</span><span
+                      class="mdc-list-item__text"><span class="mdc-list-item__primary-text">Carrots</span><span
+                        class="mdc-list-item__secondary-text">17 Oct 2017</span></span><span
+                      class="mdc-list-item__meta material-icons" aria-hidden="true">info</span></li> -->
+                </ul>
+              </section>
+              <footer class="mdc-dialog__actions">
+                <form class="ch-form">
+                  <label class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-leading-icon mdc-text-field--with-trailing-icon">
+                    <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">account_circle</span>
+                    <span class="mdc-notched-outline">
+                      <span class="mdc-notched-outline__leading"></span>
+                      <span class="mdc-notched-outline__notch">
+                        <span class="mdc-floating-label" id="my-label-id">Say Something</span>
+                      </span>
+                      <span class="mdc-notched-outline__trailing"></span>
+                    </span>
+                    <input class="mdc-text-field__input" id="ch-input" type="text" aria-labelledby="my-label-id" required>
+                    <i id="ch-submit" class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" role="button" tabindex="0">
+                      send
+                    </i>
+                  </label>
+                </form>
+                
+                </footer>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </section>
+
+    <!-- settings modal -->
+    <section class="settings-section">
+      <div class="mdc-dialog">
+        <div class="mdc-dialog__container">
+          <div class="mdc-dialog__surface"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="my-dialog-title"
+            aria-describedby="my-dialog-content">
+            <div class="mdc-dialog__content" id="my-dialog-content">
+              Discard draft?
+            </div>
+            <footer class="mdc-dialog__actions">
+              <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">Cancel</span>
+              </button>
+              <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="discard">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">Discard</span>
+              </button>
+            </footer>
+          </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+      </div>
+    </section>
+
+    <script src="{% static 'accounts/js/count-chars.js' %}"></script>
+    <script src="{% static 'accounts/js/chat.js' %}"></script>
+    <script>
+       
+        // Create the script tag, set the appropriate attributes
+        const API_KEY = "AIzaSyDTA6pssoGd_BaNHu0fp7jAZ9N1xcfgCk8";
+        var script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places&callback=initMap`;
+        script.defer = true;
+
+
+        let map;
+        let SELECTEDLOCATIONADD;
+
+        
+        // Attach your callback function to the `window` object
+        window.initMap = function() {
+          // JS API is loaded and available
+          map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: -34.397, lng: 150.644 },
+            zoom: 8,
+            disableDefaultUI: true, // a way to quickly hide all controls
+          });
+
+          let marker = new google.maps.Marker({ position: { lat: -34.397, lng: 150.644 }, map, title: "Hello World!", });
+          marker.setVisible(false);
+
+          // infowindow
+          const infowindow = new google.maps.InfoWindow();
+
+          const geocoder = new google.maps.Geocoder();
+
+          
+
+
+          // Set the bounds on creation of the Autocomplete object
+          var defaultBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(-33.8902, 151.1759),
+            new google.maps.LatLng(-33.8474, 151.2631));
+
+          // searchInputEl
+          // const searchInputEl = document.querySelector('#pac-input');
+          var input = document.getElementById('pac-input');
+          var options = {
+            bounds: defaultBounds,
+            
+          };
+
+
+          autocomplete = new google.maps.places.Autocomplete(input, options);
+
+          google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            place = autocomplete.getPlace();
+            SELECTEDLOCATIONADD = place.formatted_address;
+            input.value = SELECTEDLOCATIONADD;
+
+            const loc = new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng());
+            marker = new google.maps.Marker({
+              position: loc,
+              map: map,
+            });
+
+
+            map.setCenter(loc);
+            map.setZoom(12);
+            google.maps.event.trigger(map, 'resize');
+
+
+          });
+
+          input.addEventListener('click', function(){
+            input.value = "";
+          });
+
+
+          let placesService = new google.maps.places.PlacesService(map);
+
+          let markerr;
+          
+          map.addListener('click', function(event) {
+            // close current info window
+            infowindow.close();
+
+            // remove marker
+            marker.setMap(null);
+
+
+            if(event.placeId) {
+
+              // document.querySelector('.view-link').style.display = 'none';
+              // event.stop();
+
+              placesService.getDetails({placeId: event.placeId}, function(place, status) {
+
+                // console.log(place.formatted_address);
+                input.value = place.formatted_address;
+
+                SELECTEDLOCATIONADD = place.formatted_address;
+
+                // const locc = new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng());
+                // markerr = new google.maps.Marker({
+                //   position: locc,
+                //   map: map,
+                // });
+
+
+                // markerr.setMap(map);
+
+
+                // const infowindow = new google.maps.InfoWindow({
+                //   content: place.adr_address,
+                // });
+
+                // infowindow.open(map, markerr);
+
+              })
+            }  else {
+
+              let latlngInput = JSON.stringify(event.latLng.toJSON(), null, 2);
+              const latlngObj = JSON.parse(latlngInput);
+              const latlng = {
+                lat: parseFloat(latlngObj.lat),
+                lng: parseFloat(latlngObj.lng),
+              };
+
+              geocoder.geocode({ location: latlng }, (results, status) => {
+                if (status === "OK") {
+                  if (results[0]) {
+                    map.setCenter(latlng);
+                    map.setZoom(11);
+                    marker = new google.maps.Marker({
+                      position: latlng,
+                      map: map,
+                    });
+                    input.focus();
+                    input.value = results[0].formatted_address;
+                    // infowindow.setContent(results[0].formatted_address);
+                    // infowindow.open(map, marker);
+                  } else {
+                    window.alert("No results found");
+                  }
+                } else {
+                  window.alert("Geocoder failed due to: " + status);
+                }
+              });
+
+            }
+
+            
+
+          });
+
+
+        };
+
+
+
+        
+
+        const searchEl = document.querySelector('#pac-input');
+        
+        searchEl.addEventListener('input', (event) => {
+          console.log(event.target.value);
+
+        })
+
+        const createAutoComplete = (inputEl) => {
+
+          // Set the bounds on creation of the Autocomplete object
+          const searchBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(-33.8902, 151.1759),
+            new google.maps.LatLng(-33.8474, 151.2631)
+          );
+
+          const options = { bounds: searchBounds,};
+
+          let autocomplete = new google.maps.places.Autocomplete(inputEl, options);
+
+          return autocomplete;
+
+        }
+
+        
+
+        // Append the 'script' element to 'head'
+        document.head.appendChild(script);
+
+        
+        [].forEach.call(document.querySelectorAll('.mdc-text-field'), function(el) {
+          mdc.textField.MDCTextField.attachTo(el);
+        });
+
+        // initialize dialog
+        const dialog = new mdc.dialog.MDCDialog(document.querySelector('.mdc-dialog'));
+
+        const list = new mdc.list.MDCList(document.querySelector('.mdc-dialog .mdc-list'));
+
+        // console.log(dialog.listen())
+
+        dialog.listen('MDCDialog:opened', () => {
+          list.layout();
+          console.log('opened')
+        });
+
+        [].forEach.call(document.querySelectorAll('.mdc-dialog'), function(el) {
+          mdc.list.MDCList.attachTo(el);
+        });
+
+
+        [].forEach.call(document.querySelectorAll('.mdc-button'), function (el) {
+          mdc.ripple.MDCRipple.attachTo(el);
+        });
+
+        // const checkbox = new MDCCheckbox(document.querySelector('.mdc-checkbox'));
+        [].forEach.call(document.querySelectorAll('.mdc-checkbox'), function (el) {
+          mdc.checkbox.MDCCheckbox.attachTo(el);
+          [].forEach.call(document.querySelectorAll('.mdc-form-field'), function (fel) {
+            mdc.formField.MDCFormField.attachTo(fel);
+            fel.input = el;
+          });
+
+        });
+
+        const QNSUBMIT = document.querySelector('#qn-submit');
+        const QNINPUT = document.querySelector('#qn-input');
+        const SUBMITBTN = document.querySelector('#req-submit');
+        const LOADING = document.querySelector('.req-preloader-container');
+
+        const checkboxes = document.querySelectorAll(`#req-confirm-dialog input[name="req-cost"]`);
+        
+        checkboxes.forEach(checkbox => {
+          checkbox.addEventListener('change', (e) => {
+            // compute total
+            document.querySelector('.tt').textContent = TOTALCOST(SELECTEDCHECKBOXVALUES(e.target.name))
+            // console.log(checkbox.checked)
+
+            
+            
+          })
+        })
+
+        const SELECTEDCHECKBOXVALUES = name => {
+          const checkkboxes = document.querySelectorAll(`#req-confirm-dialog input[name="${name}"]:checked`);
+          let values = [];
+          checkkboxes.forEach(checkbox => {
+            values.push(parseInt(checkbox.value));
+          })
+          return values;
+        }
+
+        const TOTALCOST = values => {
+          let sum = 0;
+          return values.reduce((a,b) => { return a + b }, sum);
+          // return sum;
+        }
+
+
+        QNSUBMIT.addEventListener('click', () => {
+          // check if the input has been filled
+          if (QNINPUT.value == '') {
+            QNINPUT.focus();
+            return 
+          }
+
+          // check if the location has been received
+          const LOCATIONINPUT = document.getElementById('pac-input');
+          if (LOCATIONINPUT.value == '' && !SELECTEDLOCATIONADD) { 
+            LOCATIONINPUT.focus();
+            return 
+          }
+
+
+          // open dialog with the question text
+          document.querySelector('.qn-text').textContent = QNINPUT.value;
+          document.querySelector('.qn-location').textContent = LOCATIONINPUT.value;
+
+          document.querySelector('.tt').textContent = TOTALCOST(SELECTEDCHECKBOXVALUES('req-cost'))
+          
+
+          dialog.open();
+          QNINPUT.value = '';
+
+        })
+
+        document.querySelector('.req-card-mobile input').addEventListener('submit', () => {
+          // check if the input has been filled
+          if (QNINPUT.value == '') {
+            QNINPUT.focus();
+            return 
+          }
+
+          // check if the location has been received
+          const LOCATIONINPUT = document.getElementById('pac-input');
+          if (LOCATIONINPUT.value == '') { 
+            LOCATIONINPUT.focus();
+            return 
+          }
+
+
+          // open dialog with the question text
+          document.querySelector('.qn-text').textContent = QNINPUT.value;
+          document.querySelector('.qn-location').textContent = SELECTEDLOCATIONADD;
+
+          document.querySelector('.tt').textContent = TOTALCOST(SELECTEDCHECKBOXVALUES('req-cost'))
+          
+
+          dialog.open();
+        })
+
+        SUBMITBTN.addEventListener('click', () => {
+          // TODO: reset confirmation fields
+
+          // TODO: open loading animation
+          LOADING.style.display = 'flex';
+          
+          setTimeout(() => { LOADING.style.display = 'none'}, 5000); // close it after 5s 
+
+          // TODO: reset search & qn inputs
+          QNINPUT.value = "";
+          document.getElementById('pac-input').value = "";
+
+          setTimeout(() => { 
+            // open chat window
+            document.querySelector('#mdc-dialog-with-list').classList.remove('mdc-dialog--close');
+            document.querySelector('#mdc-dialog-with-list').classList.add('mdc-dialog--open');
+          }, 6000); // close it after 5s 
+
+
+        })
+
+        
+        
+
+        // chat window
+        const chatList = new mdc.list.MDCList(document.querySelector('.mdc-list'));
+
+        [].forEach.call(document.querySelectorAll('.mdc-list'), function (el) {
+          mdc.list.MDCList.attachTo(el);
+        });
+
+
+        const micon = new mdc.ripple.MDCRipple(document.querySelector('.mdc-icon-button'));
+        const iconToggle = new mdc.iconButton.MDCIconButtonToggle(document.querySelector('.mdc-icon-button'));
+        micon.unbounded = true;
+
+
+        // [].forEach.call(document.querySelectorAll('.mdc-icon-button'), function (el) {
+        //   mdc.ripple.MDCRipple.attachTo(el);
+        //   const ivc = new mdc.iconButton.MDCIconButtonToggle(el);
+        //   el.unbounded = true;
+          
+
+
+        // });
+
+        // drop down menu
+        const menu = new mdc.menu.MDCMenu(document.querySelector('.mdc-menu'));
+        menu.setAbsolutePosition(400, 400);
+
+        document.querySelector('#menu-open').addEventListener('click', () => {
+          menu.open = true;
+
+        })
+
+        document.querySelectorAll('.mdc-list-item').forEach(menu => {
+          menu.addEventListener('click', (e) => {
+            // e.stopPropagation();
+            menu.open = false;
+            console.log('clicked');
+          })
+          
+        })
+
+        document.querySelector('.edit-phone').addEventListener('click', () => {
+          const phoneInput = document.querySelector('.telephone');
+          if(phoneInput.contentEditable == "true") {
+            phoneInput.contentEditable = "false";
+            document.querySelector('.edit-phone').textContent = "edit";
+          } else {
+            phoneInput.contentEditable = "true";
+            document.querySelector('.edit-phone').textContent = "save";
+          }
+        })
+
+        document.querySelector('.edit-email').addEventListener('click', () => {
+          const phoneInput = document.querySelector('.email');
+          if(phoneInput.contentEditable == "true") {
+            phoneInput.contentEditable = "false";
+            document.querySelector('.edit-email').textContent = "edit";
+          } else {
+            phoneInput.contentEditable = "true";
+            document.querySelector('.edit-email').textContent = "save";
+          }
+        })
+
+        document.querySelector('.edit-card').addEventListener('click', () => {
+          const phoneInput = document.querySelector('.card');
+          if(phoneInput.contentEditable == "true") {
+            phoneInput.contentEditable = "false";
+            document.querySelector('.edit-card').textContent = "edit";
+          } else {
+            phoneInput.contentEditable = "true";
+            document.querySelector('.edit-card').textContent = "save";
+          }
+        })
+
+        const droplistEl = document.querySelector('.profile-list');
+
+        document.querySelector('#menu-open').addEventListener('click', () => {
+
+          // document.querySelector('.mdc-menu').style.top = '45px';
+          menu.open = true;
+        })
+
+        // menu.listen('MDCMenu:selected', () => {
+        //   console.log('selected');
+        // })
+
+        // open settings model
+        document.querySelector('#settings-open').addEventListener('click', (e) => {
+          e.stopPropagation();
+          menu.open = false; // close drop down
+          // const dialog = new mdc.dialog.MDCDialog(document.querySelector('.mdc-dialog'));
+
+
+          const SETTDIAL = new mdc.dialog.MDCDialog(document.querySelector('.settings-section .mdc-dialog'));
+          SETTDIAL.open();
+
+        })
+        
+
+        const drawer = new mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
+        const listEl = document.querySelector('.mdc-drawer .mdc-list');
+        const mainContentEl = document.querySelector('.main-content');
+        
+        document.querySelector('#drawer-button').addEventListener('click', () => { drawer.open = true })
+        // drawer.open = true;
+
+        listEl.addEventListener('click', (event) => {
+          drawer.open = false;
+        });
+
+        document.body.addEventListener('MDCDrawer:closed', () => {
+          mainContentEl.querySelector('input, button').focus();
+        });
+
+        const AVATOR = document.querySelector('#avator');
+        const AVATORLG = document.querySelector('#avator-lg');
+
+        const EMAILALIAS = document.querySelector('#email-alias')
+        if (sessionStorage.avator) {
+          AVATOR.src = sessionStorage.avator;
+          AVATORLG.src = sessionStorage.avator;
+
+        }
+        if (sessionStorage.email) {
+          EMAILALIAS.textContent = sessionStorage.email;
+        }
+
+        // document.querySelector('.name').textContent = sessionStorage.getItem('name');
+        
+        const switchControl = new mdc.switchControl.MDCSwitch(document.querySelector('.mdc-switch'));
+        // switchControl.handleChange('change', () => {
+        //   console.log('changed')
+        // })
+
+        document.querySelector('#me').addEventListener('click', () => console.log('me'));
+        
+
+        
+
+              
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+{% extends 'accounts/base.html' %}
+
+{% load static %}
+  
+{% block content %}
+  <article>
+    
+      <div class="mdc-card login-card">
+
+          <div id="loader-wrapper">
+              <div id="loader"></div>
+          </div>
+
+          <h1 class="line">sign in</h1>
+
+          <div class="mdc-chip-set mdc-chip-set--choice" id="chipset" role="grid">
+
+              <div class="mdc-touch-target-wrapper">
+                  <div class="mdc-chip mdc-chip--touch" role="row" id="fb" style="background-color: #3b5998; color: #fff;">
+                      <div class="mdc-chip__ripple"></div>
+                      <i class="material-icons mdc-chip__icon mdc-chip__icon--leading" style="color: #fff;">facebook</i>
+                      <span role="gridcell">
+                        <span role="button" tabindex="0" class="mdc-chip__primary-action">
+                          <span class="mdc-chip__text">Facebook</span>
+                        </span>
+                      </span>
+                    </div>
+                </div>
+
+                <div class="mdc-touch-target-wrapper">
+                  <div class="mdc-chip mdc-chip--touch" role="row" style="background-color: #dd4b39; color: #fff;">
+                      <div class="mdc-chip__ripple"></div>
+                      <i class="material-icons mdc-chip__icon mdc-chip__icon--leading fa fa-google" style="color: #fff;"></i>
+                      <span role="gridcell">
+                        <span role="button" tabindex="0" class="mdc-chip__primary-action">
+                          <span class="mdc-chip__text" id="customBtn">Google</span>
+                          <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+
+                        </span>
+                      </span>
+                    </div>
+                </div>
+
+                <!-- <div class="mdc-touch-target-wrapper">
+                  <div class="mdc-chip mdc-chip--touch" role="row" style="background-color: #00aced; color: #fff;"> 
+                      <div class="mdc-chip__ripple"></div>
+                      <i class="material-icons mdc-chip__icon mdc-chip__icon--leading fa fa-twitter" style="color: #fff;"></i>
+                      <span role="gridcell">
+                        <span role="button" tabindex="0" class="mdc-chip__primary-action">
+                          <span class="mdc-chip__text">Twitter</span>
+                        </span>
+                      </span>
+                    </div>
+                </div> -->
+          </div>
+
+          <h1 class="line">or sign in using email</h1>
+
+          <form action="." method="POST" class="login-form">
+
+            {% csrf_token %}
+          
+            <div class="mdc-card validation-card email">
+              <h4>Email must be in the format:</h4>
+              <p id="em"> <span class="material-icons">close</span> email@example.com</p>
+          
+            </div>
+          
+            <label class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-leading-icon">
+              <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">email</span>
+              <input type="text" class="mdc-text-field__input" name="username" id="id_username"  aria-labelledby="email-id" aria-controls="email-helper-text" aria-describedby="email-helper-text" required>
+              <!-- <input type="email" class="mdc-text-field__input" name="email" aria-labelledby="email-id" aria-controls="email-helper-text" aria-describedby="email-helper-text" required> -->
+              <span class="mdc-notched-outline">
+                <span class="mdc-notched-outline__leading"></span>
+                <span class="mdc-notched-outline__notch">
+                  <span class="mdc-floating-label" id="email-id">Email</span>
+                </span>
+                <span class="mdc-notched-outline__trailing"></span>
+              </span>
+            </label>
+
+            <!-- <div style="margin-bottom: 20px;">
+              <label class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-leading-icon" style="margin-bottom: 0;">
+                <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">email</span>
+                <input type="email" class="mdc-text-field__input" name="email" aria-labelledby="email-id" aria-controls="email-helper-text" aria-describedby="email-helper-text" required>
+                <span class="mdc-notched-outline">
+                  <span class="mdc-notched-outline__leading"></span>
+                  <span class="mdc-notched-outline__notch">
+                    <span class="mdc-floating-label" id="email-id">Email</span>
+                  </span>
+                  <span class="mdc-notched-outline__trailing"></span>
+                </span>
+              </label>
+              <div class="mdc-text-field-helper-line">
+                <div id="email-helper-text" class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg" aria-hidden="true">helper text</div>
+              </div>
+            </div> -->
+          
+            <div class="mdc-card validation-card pwd">
+              <h4>Password must contain:</h4>
+              <p id="letter"> <span class="material-icons">close</span> <b>A lowercase </b> letter</p>
+              <p id="capital"> <span class="material-icons">close</span> <b>A capital(uppercase) </b> letter</p>
+              <p id="number"> <span class="material-icons">close</span> <b>A number</b></p>
+              <p id="len"> <span class="material-icons">close</span> <b>At least 8 characters</b></p>
+            </div>
+          
+            <label id="password" class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-leading-icon mdc-text-field--with-trailing-icon">
+              <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">lock</span>
+              <input class="mdc-text-field__input" type="password" name="password" aria-labelledby="pwd" id="id_password" minlength="8" autocomplete="current-password"
+                required="">
+
+              
+
+                <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0"
+                role="button">visibility</i>
+          
+              <span class="mdc-notched-outline">
+                <span class="mdc-notched-outline__leading"></span>
+                <span class="mdc-notched-outline__notch">
+                  <span class="mdc-floating-label" id="pwd">Password</span>
+                </span>
+                <span class="mdc-notched-outline__trailing"></span>
+              </span>
+          
+            </label>
+
+            <!-- <div class="mdc-text-field-helper-line">
+              <div id="password-helper-text" class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg" aria-hidden="true">
+                
+              </div>
+            </div> -->
+
+            <!-- <a href="">Forgot password?</a> -->
+          
+            <!-- <div class="mdc-form-field">
+              <div class="mdc-checkbox">
+                <input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-tc" required />
+                <div class="mdc-checkbox__background">
+                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                    <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                  </svg>
+                  <div class="mdc-checkbox__mixedmark"></div>
+                </div>
+                <div class="mdc-checkbox__ripple"></div>
+              </div>
+              <label for="checkbox-1">I accept the Terms & Conditions</label>
+            </div> -->
+          
+          
+            <button class="mdc-button mdc-button--raised btn-submit-lg" type="submit" id="btn-login">
+              <div class="mdc-button__ripple"></div>
+              <span class="mdc-button__label">sign in</span>
+            </button>
+          
+          </form>
+
+          <!-- <div id="checksField">
+            <h3>Password must contain the following:</h3>
+            <p id="letter" class="wrong">A <b>lowercase</b> letter</p>
+            <p id="capital" class="wrong">A <b>capital (uppercase)</b>letter</p>
+            <p id="number" class="wrong">A <b>number</b></p>
+            <p id="len" class="wrong">A <b>At least 8 characters</b></p>
+
+          </div> -->
+
+      </div>
+
+
+  </article>
+
+  <script src="{% static 'accounts/js/script.js' %}"></script>
+
+{% endblock content %}
