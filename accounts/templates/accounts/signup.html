@@ -316,7 +316,7 @@
     var input = document.querySelector("#phone");
     var iti = window.intlTelInput(input, {
       // any initialisation options go here
-      utilsScript: "../../static/accounts/js/utils.js?1585994360633"
+      utilsScript: "{% static 'accounts/js/utils.js?1585994360633' %}"
     });
 
     const errorMsg = document.querySelector('.mdc-text-field-helper-text');
