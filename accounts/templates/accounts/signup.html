@@ -141,7 +141,7 @@
           <div class="mdc-dialog__content" id="my-dialog-content">
             <form method="POST" action="." class="signup-form">
               {% csrf_token %}
-              <!-- {{ form.as_p }} -->
+              {{ form.as_p }}
               <label style="margin-top: 5px;" class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-leading-icon">
                 <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">account_circle</span>
                 <input type="text" class="mdc-text-field__input" name="first_name" id="id_first_name" aria-labelledby="fname" required>
@@ -190,7 +190,7 @@
               
               <label class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-leading-icon">
                 <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">email</span>
-                <input type="email" class="mdc-text-field__input" name="email" id="id_email" maxlength="254" aria-labelledby="email-id" required>
+                <input type="email" class="mdc-text-field__input" name="email" id="id_email" maxlength="255" aria-labelledby="email-id" autofocus="" required="">
                 <span class="mdc-notched-outline">
                   <span class="mdc-notched-outline__leading"></span>
                   <span class="mdc-notched-outline__notch">

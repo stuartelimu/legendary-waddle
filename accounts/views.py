@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.views.generic import CreateView
 from django.views.generic.edit import FormView
 from django.views import View
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth import authenticate, login
 from django.core.mail import send_mail
 from django.utils import timezone
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.contrib.auth.views import LoginView
 
 from .models import CustomUser, CustomUserVerificationCode
 from .forms import CustomUserCreationForm, CustomUserVerificationCodeForm
@@ -17,6 +18,17 @@ class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('verification')
     template_name = 'accounts/signup.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(SignUpView, self).get_form_kwargs()
+        print(kwargs)
+        kwargs['initial']['email'] = self.request.session['email']
+        kwargs['initial']['password1'] = self.request.session['password']
+        print(kwargs)
+        return kwargs
+
+    # def get_initial(self):
+    #     return {'email': self.request.session['email']}
 
     def form_valid(self, form):
         self.email = form.cleaned_data.get('email')
@@ -116,4 +128,27 @@ class SendVerificationCode(View):
             messages.warning(self.request, 'We couldn"t find that user. Please try again')
 
         return HttpResponseRedirect('/accounts/verification/')
+
+
+class UserLoginView(LoginView):
+
+    def form_invalid(self, form):
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+
+        print(username)
+
+        if CustomUser.objects.filter(email=username).exists():
+            print('is there')
+            return super().form_invalid(form)
+        else:
+            print('does not exist')
+            self.request.session['email'] = username
+            self.request.session['password'] = password
+            return HttpResponseRedirect(reverse('signup'))
+
+        
+
+        
+
     
