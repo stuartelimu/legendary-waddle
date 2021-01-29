@@ -53,7 +53,7 @@ document.querySelector('input[name=password1]').addEventListener('input', () => 
 })
 
 
-// const PWD = document.querySelector("#pwd");
+const PWD = document.querySelector("#id_password1");
 // var letter = document.querySelector("#letter span");
 // var capital = document.querySelector("#capital span");
 // var number = document.querySelector("#number span");
@@ -66,47 +66,47 @@ document.querySelector('input[name=password1]').addEventListener('input', () => 
 //   document.querySelector(".pwd").style.display = "none";
 // };
 
-// PWD.onkeyup = function() {
-//   document.querySelector(".pwd").style.display = "block";
-//   let lowerCaseLetters = /[a-z]/g;
+PWD.onkeyup = function() {
+  document.querySelector(".pwd").style.display = "block";
+  let lowerCaseLetters = /[a-z]/g;
 
-//   if (PWD.value.match(lowerCaseLetters)) {
-//     letter.textContent = "done";
-//     letter.style.backgroundColor = "green";
-//   } else {
-//     letter.textContent = "close";
-//     letter.style.backgroundColor = "red";
-//   }
+  if (PWD.value.match(lowerCaseLetters)) {
+    letter.textContent = "done";
+    letter.style.backgroundColor = "green";
+  } else {
+    letter.textContent = "close";
+    letter.style.backgroundColor = "red";
+  }
 
-//   let upperCaseLetters = /[A-Z]/g;
+  let upperCaseLetters = /[A-Z]/g;
 
-//   if (PWD.value.match(upperCaseLetters)) {
-//     capital.textContent = "done";
-//     capital.style.backgroundColor = "green";
-//   } else {
-//     capital.textContent = "close";
-//     capital.style.backgroundColor = "red";
-//   }
+  if (PWD.value.match(upperCaseLetters)) {
+    capital.textContent = "done";
+    capital.style.backgroundColor = "green";
+  } else {
+    capital.textContent = "close";
+    capital.style.backgroundColor = "red";
+  }
   
-//   let numbers = /[0-9]/g;
+  let numbers = /[0-9]/g;
 
-//   if (PWD.value.match(numbers)) {
-//     number.textContent = "done";
-//     number.style.backgroundColor = "green";
-//   } else {
-//     number.textContent = "close";
-//     number.style.backgroundColor = "red";
-//   }
+  if (PWD.value.match(numbers)) {
+    number.textContent = "done";
+    number.style.backgroundColor = "green";
+  } else {
+    number.textContent = "close";
+    number.style.backgroundColor = "red";
+  }
 
-//   if (PWD.value.length >= 8) {
-//     len.textContent = "done";
-//     len.style.backgroundColor = "green";
-//   } else {
-//     len.textContent = "close";
-//     len.style.backgroundColor = "red";
-//   }
+  if (PWD.value.length >= 8) {
+    len.textContent = "done";
+    len.style.backgroundColor = "green";
+  } else {
+    len.textContent = "close";
+    len.style.backgroundColor = "red";
+  }
 
-// };
+};
 
 // toggle confirm password visibility
 document.querySelector('#toggle-confirm-password').addEventListener('click', () => {

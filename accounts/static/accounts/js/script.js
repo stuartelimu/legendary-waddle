@@ -14,7 +14,7 @@
 
 
 // form submit
-const PWD = document.querySelector("#pwd");
+const PWD = document.querySelector("#id_password");
 var letter = document.querySelector("#letter span");
 var capital = document.querySelector("#capital span");
 var number = document.querySelector("#number span");
