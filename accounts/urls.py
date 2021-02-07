@@ -8,4 +8,5 @@ urlpatterns = [
     path('resend_code/',SendVerificationCode.as_view(), name='resend-code'),
     path('login/', UserLoginView.as_view(), name='user_login'),
     path('', include('django.contrib.auth.urls')),
+    path('', include('social_django.urls', namespace='social')),
 ]
