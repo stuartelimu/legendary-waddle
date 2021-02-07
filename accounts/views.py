@@ -49,8 +49,8 @@ class SignUpView(CreateView):
             code = CustomUserVerificationCode.objects.get(user=user).code
 
             send_mail(
-                'verification code',
-                f'verification code {code}',
+                'OmniGlobal Verification code',
+                f'Hi there, \nYour verification code is {code}',
                 'stuartelimu@gmail.com',
                 [self.email,],
                 fail_silently=False,
@@ -76,7 +76,7 @@ class VerificationCodeView(FormView):
 
         diff = time_now - time_code_sent
 
-        if diff.days == 0 and diff.seconds < 45:
+        if diff.days == 0 and diff.seconds < 300:
             verification_code = form.cleaned_data.get('code')
             code = CustomUserVerificationCode.objects.get(user=user).code
 
