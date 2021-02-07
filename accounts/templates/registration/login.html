@@ -15,7 +15,7 @@
 
           <div class="mdc-chip-set mdc-chip-set--choice" id="chipset" role="grid">
 
-              <div class="mdc-touch-target-wrapper">
+              <a href="{% url 'social:begin' 'facebook' %}" style="text-decoration: none;" class="mdc-touch-target-wrapper">
                   <div class="mdc-chip mdc-chip--touch" role="row" id="fb" style="background-color: #3b5998; color: #fff;">
                       <div class="mdc-chip__ripple"></div>
                       <i class="material-icons mdc-chip__icon mdc-chip__icon--leading" style="color: #fff;">facebook</i>
@@ -25,7 +25,7 @@
                         </span>
                       </span>
                     </div>
-                </div>
+                </a>
 
                 <a href="{% url 'social:begin' 'google-oauth2' %}" style="text-decoration: none;" class="mdc-touch-target-wrapper">
                   <div class="mdc-chip mdc-chip--touch" role="row" style="background-color: #dd4b39; color: #fff;">
