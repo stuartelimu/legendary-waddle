@@ -14,7 +14,9 @@
 
 
 // form submit
-const PWD = document.querySelector("#id_password");
+const PWD = document.querySelector("#id_password1");
+const PWD1 = document.querySelector("#id_password2");
+
 var letter = document.querySelector("#letter span");
 var capital = document.querySelector("#capital span");
 var number = document.querySelector("#number span");
@@ -70,7 +72,7 @@ PWD.onkeyup = function() {
 };
 
 // toggle password visibility
-document.querySelector('.mdc-text-field__icon--trailing').addEventListener('click', () => {
+PWD.nextElementSibling.addEventListener('click', () => {
   if(PWD.type === 'password') {
     PWD.type = 'text';
     document.querySelector('.mdc-text-field__icon--trailing').textContent = 'visibility_off';
@@ -78,6 +80,18 @@ document.querySelector('.mdc-text-field__icon--trailing').addEventListener('clic
     PWD.focus();
     PWD.type = 'password';
     document.querySelector('.mdc-text-field__icon--trailing').textContent = 'visibility';
+  }
+})
+
+// toggle confirm password visibility
+document.querySelector('#pwd2').addEventListener('click', () => {
+  if(PWD1.type === 'password') {
+    PWD1.type = 'text';
+    document.querySelector('#pwd2').textContent = 'visibility_off';
+  } else {
+    PWD1.focus();
+    PWD1.type = 'password';
+    document.querySelector('#pwd2').textContent = 'visibility';
   }
 })
 
