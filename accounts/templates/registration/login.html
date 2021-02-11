@@ -7,6 +7,21 @@
     
       <div class="mdc-card login-card">
 
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <div class="mdc-chip" role="row" style="margin-bottom: 20px; height: unset; padding: 5px;">
+          <div class="mdc-chip__ripple"></div>
+          <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">warning</i>
+          <span role="gridcell">
+            <span role="button" tabindex="0" class="mdc-chip__primary-action">
+              <p class="mdc-chip__textt">{{ error }}</p>
+            </span>
+          </span>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+
           <div id="loader-wrapper">
               <div id="loader"></div>
           </div>
@@ -167,6 +182,21 @@
 
 
   </article>
+
+  <script>
+    const PWD2 = document.querySelector("#id_password");
+
+    PWD2.nextElementSibling.addEventListener('click', () => {
+      if(PWD2.type === 'password') {
+        PWD2.type = 'text';
+        document.querySelector('.mdc-text-field__icon--trailing').textContent = 'visibility_off';
+      } else {
+        PWD2.focus();
+        PWD2.type = 'password';
+        document.querySelector('.mdc-text-field__icon--trailing').textContent = 'visibility';
+      }
+    })
+  </script>
 
   <script src="{% static 'accounts/js/script.js' %}"></script>
 

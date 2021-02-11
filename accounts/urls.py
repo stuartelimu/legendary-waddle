@@ -7,7 +7,7 @@ urlpatterns = [
     path('verification/', VerificationCodeView.as_view(), name='verification'),
     path('resend_code/',SendVerificationCode.as_view(), name='resend-code'),
     path('updatetel/', updatetel, name='update-tel'),
-    # path('login/', UserLoginView.as_view(), name='user_login'),
+    path('login/', UserLoginView.as_view(), name='user_login'),
     path('', include('django.contrib.auth.urls')),
     path('', include('social_django.urls', namespace='social')),
 ]

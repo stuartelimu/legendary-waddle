@@ -5,6 +5,12 @@
 
 {% block content %}
 
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj8a2aHJa_yosSy6qaPDlgH4SGkMW4bbk&callback=initMap&libraries=&v=weekly"
+  defer
+></script>
+
 
   <style>
 
@@ -76,7 +82,7 @@
     <!-- sign up -->
     
 
-    <div class="mdc-dialog mdc-dialog--open signup-card" style="left: unset;">
+    <div class="mdc-dialog mdc-dialog--open signup-card" style="left: unset; padding: 20px;">
       <div class="mdc-dialog__container">
         <div class="mdc-dialog__surface signup-card"
           style=" width: 450px;"
@@ -100,15 +106,7 @@
               {% endfor %}
           </ul>
           {% endif %}
-          <!-- <div class="mdc-chip" role="row">
-            <div class="mdc-chip__ripple"></div>
-            <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">event</i>
-            <span role="gridcell">
-              <span role="button" tabindex="0" class="mdc-chip__primary-action">
-                <span class="mdc-chip__text">Add to calendar</span>
-              </span>
-            </span>
-          </div> -->
+          
 
           <div id="loader-wrapper">
             <div id="loader"></div>
@@ -116,11 +114,10 @@
           <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
           <div class="mdc-dialog__title" id="my-dialog-title">
             <p class="small">We have sent a verification code to {{ request.session.email }}</p>
-            <!-- <a href="">use email instead?</a> -->
           </div>
 
           <div class="mdc-dialog__content" id="my-dialog-content">
-            <form action="." method="POST" class="signup-form">
+            <form action="." method="POST" class="signup-form" style="margin-top: 10px;">
               {% csrf_token %}
               <label class="mdc-text-field fw mdc-text-field--outlined mdc-text-field--with-leading-icon">
                 <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">security</span>
@@ -149,7 +146,6 @@
 
   </article>
 
-  <script src="{% static 'accounts/js/signup.js' %}"></script>
   <script src="{% static 'accounts/js/script.js' %}"></script>
 
 
@@ -159,7 +155,7 @@
     const PHONE = sessionStorage.getItem('phone');
     const EMAIL = sessionStorage.getItem('email');
 
-    document.querySelector('.phone').textContent = PHONE;
+    // document.querySelector('.phone').textContent = PHONE;
 
     let map;
 

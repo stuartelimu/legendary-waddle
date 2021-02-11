@@ -14,6 +14,8 @@
 
 
 // form submit
+
+
 const PWD = document.querySelector("#id_password1");
 const PWD1 = document.querySelector("#id_password2");
 
@@ -25,51 +27,51 @@ var em = document.querySelector("#em span");
 
 
 
-PWD.onblur = function() {
-  document.querySelector(".pwd").style.display = "none";
-};
+// PWD.onblur = function() {
+//   document.querySelector(".pwd").style.display = "none";
+// };
 
-PWD.onkeyup = function() {
-  document.querySelector(".pwd").style.display = "block";
-  let lowerCaseLetters = /[a-z]/g;
+// PWD.onkeyup = function() {
+//   document.querySelector(".pwd").style.display = "block";
+//   let lowerCaseLetters = /[a-z]/g;
 
-  if (PWD.value.match(lowerCaseLetters)) {
-    letter.textContent = "done";
-    letter.style.backgroundColor = "green";
-  } else {
-    letter.textContent = "close";
-    letter.style.backgroundColor = "red";
-  }
+//   if (PWD.value.match(lowerCaseLetters)) {
+//     letter.textContent = "done";
+//     letter.style.backgroundColor = "green";
+//   } else {
+//     letter.textContent = "close";
+//     letter.style.backgroundColor = "red";
+//   }
 
-  let upperCaseLetters = /[A-Z]/g;
+//   let upperCaseLetters = /[A-Z]/g;
 
-  if (PWD.value.match(upperCaseLetters)) {
-    capital.textContent = "done";
-    capital.style.backgroundColor = "green";
-  } else {
-    capital.textContent = "close";
-    capital.style.backgroundColor = "red";
-  }
+//   if (PWD.value.match(upperCaseLetters)) {
+//     capital.textContent = "done";
+//     capital.style.backgroundColor = "green";
+//   } else {
+//     capital.textContent = "close";
+//     capital.style.backgroundColor = "red";
+//   }
   
-  let numbers = /[0-9]/g;
+//   let numbers = /[0-9]/g;
 
-  if (PWD.value.match(numbers)) {
-    number.textContent = "done";
-    number.style.backgroundColor = "green";
-  } else {
-    number.textContent = "close";
-    number.style.backgroundColor = "red";
-  }
+//   if (PWD.value.match(numbers)) {
+//     number.textContent = "done";
+//     number.style.backgroundColor = "green";
+//   } else {
+//     number.textContent = "close";
+//     number.style.backgroundColor = "red";
+//   }
 
-  if (PWD.value.length >= 8) {
-    len.textContent = "done";
-    len.style.backgroundColor = "green";
-  } else {
-    len.textContent = "close";
-    len.style.backgroundColor = "red";
-  }
+//   if (PWD.value.length >= 8) {
+//     len.textContent = "done";
+//     len.style.backgroundColor = "green";
+//   } else {
+//     len.textContent = "close";
+//     len.style.backgroundColor = "red";
+//   }
 
-};
+// };
 
 // toggle password visibility
 PWD.nextElementSibling.addEventListener('click', () => {
@@ -82,6 +84,9 @@ PWD.nextElementSibling.addEventListener('click', () => {
     document.querySelector('.mdc-text-field__icon--trailing').textContent = 'visibility';
   }
 })
+
+// toggle password visibility
+
 
 // toggle confirm password visibility
 document.querySelector('#pwd2').addEventListener('click', () => {

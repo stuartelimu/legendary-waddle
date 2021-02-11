@@ -141,9 +141,10 @@ class UserLoginView(LoginView):
 
         if CustomUser.objects.filter(email=username).exists():
             print('is there')
-            user = form.get_user()
-            login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return HttpResponseRedirect(self.get_success_url())
+            # user = form.get_user()
+            # login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
+            # return HttpResponseRedirect(self.get_success_url())
+            return super().form_invalid(form)
         else:
             print('does not exist')
             self.request.session['email'] = username
