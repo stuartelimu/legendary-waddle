@@ -7,8 +7,9 @@ from django.contrib.auth import authenticate, login
 from django.core.mail import send_mail
 from django.utils import timezone
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.views import LoginView
+import json
 
 from .models import CustomUser, CustomUserVerificationCode
 from .forms import CustomUserCreationForm, CustomUserVerificationCodeForm
@@ -140,12 +141,34 @@ class UserLoginView(LoginView):
 
         if CustomUser.objects.filter(email=username).exists():
             print('is there')
-            return super().form_invalid(form)
+            user = form.get_user()
+            login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return HttpResponseRedirect(self.get_success_url())
         else:
             print('does not exist')
             self.request.session['email'] = username
             self.request.session['password'] = password
             return HttpResponseRedirect(reverse('signup'))
+
+
+# class UpdateTelephone(View):
+
+#     def post(self, request, *args, **kwargs):
+#         if request.is_ajax and request.method == 'POST':
+#             tel = request.GET.get('telephone', None)
+#             print(tel)
+#             user = request.user
+#             user.profile.telephone = tel
+#             data = user.save()
+#             ser_instance = serializers.serialize('json', [ data, ])
+#             return JsonResponse({"data": data}, status=200)
+
+def updatetel(request):
+    if request.is_ajax():
+        data = json.loads(request.raw_post_data)
+        print(data)
+        return JsonResponse({"data": ""}, status=200)
+
 
         
 

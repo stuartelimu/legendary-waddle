@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import CustomUser
+from .models import CustomUser, Profile
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -17,3 +17,10 @@ class CustomUserCreationForm(UserCreationForm):
 
 class CustomUserVerificationCodeForm(forms.Form):
     code = forms.IntegerField()
+
+
+class ProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ['telephone',]

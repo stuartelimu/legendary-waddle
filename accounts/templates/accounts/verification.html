@@ -86,18 +86,17 @@
           aria-describedby="my-dialog-content">
 
           {% if messages %}
-          <ul class="messages">
+          <ul class="mx-2 messages">
               {% for message in messages %}
               <div class="mdc-chip" role="row">
                 <div class="mdc-chip__ripple"></div>
-                <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">event</i>
+                <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">info</i>
                 <span role="gridcell">
                   <span role="button" tabindex="0" class="mdc-chip__primary-action">
                     <span class="mdc-chip__text">{{ message }}</span>
                   </span>
                 </span>
               </div>
-              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
               {% endfor %}
           </ul>
           {% endif %}

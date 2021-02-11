@@ -36,17 +36,13 @@
         <nav class="mdc-list">
           <a class="mdc-list-item mdc-list-item--activated" href="#" tabindex="0" aria-selected="true">
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
-            Inbox
+            Your Responses
           </a>
-          <a class="mdc-list-item" href="#" tabindex="-1">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i>
-            Star
-          </a>
-          <a class="mdc-list-item" href="#" tabindex="-1">
+          <a class="mdc-list-item" tabindex="-1">
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
-            Sent Mail
+            Your Responses
           </a>
-          <a class="mdc-list-item" href="#" tabindex="-1">
+          <a class="mdc-list-item" tabindex="-1">
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>
             Drafts
           </a>
@@ -60,12 +56,8 @@
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i>
             Friends
           </a>
-          <a class="mdc-list-item" href="#" tabindex="-1">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bookmark</i>
-            Language
-          </a>
           <hr class="mdc-list-divider">
-          <a class="mdc-list-item" href="#" tabindex="-1">
+          <a class="mdc-list-item" id="sopen" tabindex="-1">
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">settings</i>
             Settings
           </a>
@@ -75,6 +67,74 @@
             </i>
             Help &amp; feedback
           </a>
+        </nav>
+      </div>
+    </aside>
+    <aside id="sdrawer" class="mdc-drawer mdc-drawer--modal">
+      <div class="mdc-drawer__header">
+        <h3 class="mdc-drawer__title">Settings</h3>
+        <h6 class="mdc-drawer__subtitle">APP SETTINGS</h6>
+
+      </div>
+      <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+          <hr class="mdc-list-divider">
+          <h6 class="mdc-list-group__subheader">Privacy</h6>
+          <a class="mdc-list-item mdc-list-item--activated" tabindex="0" aria-selected="true">
+              Private Account
+              <div class="mdc-switch mdc-list-item__meta">
+                <div class="mdc-switch__track"></div>
+                <div class="mdc-switch__thumb-underlay">
+                  <div class="mdc-switch__thumb"></div>
+                  <input type="checkbox" id="basic-switch" class="mdc-switch__native-control" role="switch" aria-checked="false">
+                </div>
+              </div>
+
+          </a>
+          
+          <hr class="mdc-list-divider">
+          <h6 class="mdc-list-group__subheader">Push Notifications</h6>
+          <a class="mdc-list-item" tabindex="-1">
+            Discounts
+            <div class="mdc-switch mdc-list-item__meta">
+                <div class="mdc-switch__track"></div>
+                <div class="mdc-switch__thumb-underlay">
+                  <div class="mdc-switch__thumb"></div>
+                  <input type="checkbox" id="basic-switch" class="mdc-switch__native-control" role="switch" aria-checked="false">
+                </div>
+              </div>
+          </a>
+          <a class="mdc-list-item" tabindex="-1">
+            News
+            <div class="mdc-switch mdc-list-item__meta">
+                <div class="mdc-switch__track"></div>
+                <div class="mdc-switch__thumb-underlay">
+                  <div class="mdc-switch__thumb"></div>
+                  <input type="checkbox" id="basic-switch" class="mdc-switch__native-control" role="switch" aria-checked="false">
+                </div>
+              </div>
+          </a>
+          <a class="mdc-list-item" tabindex="-1">
+            New Deals
+            <div class="mdc-switch mdc-list-item__meta">
+                <div class="mdc-switch__track"></div>
+                <div class="mdc-switch__thumb-underlay">
+                  <div class="mdc-switch__thumb"></div>
+                  <input type="checkbox" id="basic-switch" class="mdc-switch__native-control" role="switch" aria-checked="false">
+                </div>
+              </div>
+          </a>
+          <hr class="mdc-list-divider">
+          <h6 class="mdc-list-group__subheader">Preferences</h6>
+          <a class="mdc-list-item" tabindex="-1">
+            Dark Mode
+            <i class="material-icons mdc-list-item__meta" aria-hidden="true">settings</i>
+          </a>
+          <a class="mdc-list-item" tabindex="-1">
+            Language
+            <i class="material-icons mdc-list-item__meta" aria-hidden="true">flag</i>
+          </a>
+          
         </nav>
       </div>
     </aside>
@@ -137,12 +197,21 @@
                     <!-- <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span> -->
                   </li>
                   <li class="my-mdc-list-item" role="menuitem" tabindex="1">
-                    <!-- <span class="mdc-list-item__ripple"></span> -->
                     <span class="mdc-list-item__graphic material-icons">call</span>
-                    <span class="mdc-list-item__text telephone">{{ request.user.profile.telephone }}</span>
+                    <form id="edit-phone" action="{% url 'update-tel' %}" method="POST">
+                      {% csrf_token %}
+                      <label class="mdc-text-field mdc-text-field--filled dc-text-field--with-trailing-icon" style="background-color: transparent;">
+                        <span class="mdc-text-field__ripple"></span>
+                        <input class="mdc-text-field__input" type="text" id="id_telephone" name="telephone" value="{{ request.user.profile.telephone }}" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" >
+                        <span class="mdc-line-ripple"></span>
+                      </label>
+                      <!-- <div class="mdc-text-field-helper-line">
+                        <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-filled-trailing-helper-text">Helper Text</p>
+                      </div> -->
+                    </form>
+                    <!-- <span class="mdc-list-item__text telephone">{{ request.user.profile.telephone }}</span> -->
                     <span class="mdc-list-item__meta material-icons edit-phone" aria-hidden="true">edit</span>
 
-    
                   </li>
                   <li class="my-mdc-list-item" role="menuitem" tabindex="2">
                     <!-- <span class="mdc-list-item__ripple"></span> -->
@@ -633,10 +702,16 @@
 
     <script src="{% static 'accounts/js/count-chars.js' %}"></script>
     <script src="{% static 'accounts/js/chat.js' %}"></script>
+    <!-- <script src="{% static 'accounts/js/script.js' %}"></script> -->
+    <script src="{% static 'js/update-profile.js' %}"></script>
+
+
     <script>
+
+        
        
         // Create the script tag, set the appropriate attributes
-        const API_KEY = "AIzaSyDTA6pssoGd_BaNHu0fp7jAZ9N1xcfgCk8";
+        const API_KEY = "AIzaSyAj8a2aHJa_yosSy6qaPDlgH4SGkMW4bbk";
         var script = document.createElement('script');
         script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places&callback=initMap`;
         script.defer = true;
@@ -1004,16 +1079,7 @@
           
         })
 
-        document.querySelector('.edit-phone').addEventListener('click', () => {
-          const phoneInput = document.querySelector('.telephone');
-          if(phoneInput.contentEditable == "true") {
-            phoneInput.contentEditable = "false";
-            document.querySelector('.edit-phone').textContent = "edit";
-          } else {
-            phoneInput.contentEditable = "true";
-            document.querySelector('.edit-phone').textContent = "save";
-          }
-        })
+        
 
         document.querySelector('.edit-email').addEventListener('click', () => {
           const phoneInput = document.querySelector('.email');
@@ -1063,10 +1129,18 @@
         
 
         const drawer = new mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
+        const sdrawer = new mdc.drawer.MDCDrawer.attachTo(document.querySelector('#sdrawer'));
+
         const listEl = document.querySelector('.mdc-drawer .mdc-list');
         const mainContentEl = document.querySelector('.main-content');
         
         document.querySelector('#drawer-button').addEventListener('click', () => { drawer.open = true })
+
+        document.querySelector('#sopen').addEventListener('click', () => { 
+          sdrawer.open = true; 
+          drawer.open = false;
+        })
+
         // drawer.open = true;
 
         listEl.addEventListener('click', (event) => {
@@ -1093,13 +1167,12 @@
         // document.querySelector('.name').textContent = sessionStorage.getItem('name');
         
         const switchControl = new mdc.switchControl.MDCSwitch(document.querySelector('.mdc-switch'));
-        // switchControl.handleChange('change', () => {
-        //   console.log('changed')
-        // })
-
-        document.querySelector('#me').addEventListener('click', () => console.log('me'));
         
+        [].forEach.call(document.querySelectorAll('.mdc-switch'), function (el) {
+          mdc.switchControl.MDCSwitch.attachTo(el);
+        });
 
+        
         
 
               
